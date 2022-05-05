@@ -7,20 +7,24 @@
 using namespace std;
 
 template<class T>
-Filo<T>::Filo()
+Filo<T>::Filo():Filo(100)
 {
-    Filo<T>(100);
+
 }
 template<class T>
 Filo<T>::Filo(int _size)
 {
     this->ar = new T[_size];
     this->size = _size;
+    countData = 0;
 }
 template<class T>
 Filo<T>::~Filo()
 {
-    delete this->ar;
+    if (this->ar != nullptr)
+    {
+        delete this->ar;
+    }
 }
 
 template<class T>

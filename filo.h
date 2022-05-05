@@ -16,10 +16,10 @@ private :
     int size;	//размер массива
     int countData;	//число элементов в массиве
 public :
-    Filo();
-    Filo(int _size);
+     Filo();
+     Filo(int _size);
 
-    ~Filo();
+     ~Filo();
     /*
         input		:	элемент который надо добавить
         output		:	1 - элемент добавлен, 0 - элемент не добавлен
