@@ -1,18 +1,15 @@
 #include <iostream>
 
-#include "filo.h"
-#include "filo.cpp"
-#include "check_brackets.h"
-#include "graph.h"
+
+#include "tasks_rk2.h"
+
 
 using namespace std;
 
 Filo<int> filo(3);
 CheckBrackets<char> cb;
 
-ostream& operator<< (ostream& ostr, const pair<int, int> val) { // task 4
-    return (ostr << "(" << val.first << ", " << val.second << ")\n");
-}
+
 
 pair<int/*index el*/, int /*count call*/> binSearchRecurs(int* ar, int left, int right, int el, int recurs_depth)
 {
@@ -83,10 +80,11 @@ void task5()
 int array[7] = {1, 4, 6, 7, 11, 36, 41};
 
 int main() {
-    //task3();
-    //task5();
-    //pair<int, int> test = binSearch(array, 7, 41);
-    //cout << test;
+    task3();
+    task5();
+    cout << endl;
+    pair<int, int> test = binSearch(array, 7, 41);
+    cout << test;
 
     auto graph = new Graph();
     int r = graph->buildTreeBFS(3);

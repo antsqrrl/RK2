@@ -4,7 +4,8 @@
 
 #include <vector>
 #include <fstream>
-#include "graph.h"
+#include <cstring>
+#include "tasks_rk2.h"
 
 Node::Node()
 {
@@ -214,4 +215,11 @@ void Graph::DFS()
     printNode(fout, head);
 
     fout.close();
+}
+
+////////////////////
+
+
+ostream& operator<< (ostream& ostr, const pair<int, int> val) { // task 4
+    return (ostr << "(" << val.first << ", " << val.second << ")\n");
 }
