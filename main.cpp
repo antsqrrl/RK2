@@ -3,16 +3,56 @@
 #include "filo.h"
 #include "filo.cpp"
 #include "check_brackets.h"
-
-
+#include "graph.h"
 
 using namespace std;
 
 Filo<int> filo(3);
 CheckBrackets<char> cb;
 
-ostream& operator<< (ostream& ostr, const pair<int, int> val) {
+ostream& operator<< (ostream& ostr, const pair<int, int> val) { // task 4
     return (ostr << "(" << val.first << ", " << val.second << ")\n");
+}
+
+pair<int/*index el*/, int /*count call*/> binSearchRecurs(int* ar, int left, int right, int el, int recurs_depth)
+{
+    if (right - left <= 1)
+    {
+        if (ar[left] == el)
+        {
+            return  make_pair(left, recurs_depth+1);
+        }
+        if (ar[right] == el)
+        {
+            return  make_pair(right, recurs_depth+1);
+        }
+    }
+    int middle = (left+right)/2;
+    if (ar[middle] == el)
+    {
+        return make_pair(middle, recurs_depth);
+    }
+    if (ar[middle] > el)
+    {
+        auto r = binSearchRecurs(ar, left, middle, el, recurs_depth+1);
+        if (r.first != -1)
+        {
+            return r;
+        }
+    }
+    if (ar[middle] < el)
+    {
+        auto r = binSearchRecurs(ar, middle, right, el, recurs_depth+1);
+        if (r.first != -1)
+        {
+            return r;
+        }
+    }
+    return make_pair(-1, recurs_depth);
+}
+pair<int/*index el*/,int /*count call*/> binSearch(int* ar, int sizeAr, int el)
+{
+    return binSearchRecurs(ar, 0, sizeAr-1, el, 1);
 }
 
 void task3()
@@ -34,13 +74,30 @@ void task3()
 }
 void task5()
 {
-
-    cout << cb.checkBrackets("{{()[()]}}");
+    const char* brackets = "{(})[{]}";
+    cout << "Your brackets: " << brackets << endl;
+    cout << cb.checkBrackets(brackets);
 
 }
 
+int array[7] = {1, 4, 6, 7, 11, 36, 41};
+
 int main() {
     //task3();
-    task5();
+    //task5();
+    //pair<int, int> test = binSearch(array, 7, 41);
+    //cout << test;
+
+    auto graph = new Graph();
+    int r = graph->buildTreeBFS(3);
+    auto r1 = graph->searchBFS(15);
+    auto r2 = graph->searchBFS(16);
+
+    auto r3 = graph->searchDFS(15);
+    auto r4 = graph->searchDFS(16);
+
+    graph->BFS();
+    graph->DFS();
+
     return 0;
 }
