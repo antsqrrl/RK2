@@ -182,4 +182,7 @@ public :
 
 ostream& operator<< (ostream& ostr, const pair<int, int> val);
 
+pair<int/*index el*/, int /*count call*/> binSearchRecurs(int* ar, int left, int right, int el, int recurs_depth);
+pair<int/*index el*/,int /*count call*/> binSearch(int* ar, int sizeAr, int el);
+
 #endif //RK2_TASKS_RK2_H

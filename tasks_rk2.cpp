@@ -223,3 +223,46 @@ void Graph::DFS()
 ostream& operator<< (ostream& ostr, const pair<int, int> val) { // task 4
     return (ostr << "(" << val.first << ", " << val.second << ")\n");
 }
+
+///////////////////
+
+pair<int/*index el*/, int /*count call*/> binSearchRecurs(int* ar, int left, int right, int el, int recurs_depth)
+{
+    if (right - left <= 1)
+    {
+        if (ar[left] == el)
+        {
+            return  make_pair(left, recurs_depth+1);
+        }
+        if (ar[right] == el)
+        {
+            return  make_pair(right, recurs_depth+1);
+        }
+    }
+    int middle = (left+right)/2;
+    if (ar[middle] == el)
+    {
+        return make_pair(middle, recurs_depth);
+    }
+    if (ar[middle] > el)
+    {
+        auto r = binSearchRecurs(ar, left, middle, el, recurs_depth+1);
+        if (r.first != -1)
+        {
+            return r;
+        }
+    }
+    if (ar[middle] < el)
+    {
+        auto r = binSearchRecurs(ar, middle, right, el, recurs_depth+1);
+        if (r.first != -1)
+        {
+            return r;
+        }
+    }
+    return make_pair(-1, recurs_depth);
+}
+pair<int/*index el*/,int /*count call*/> binSearch(int* ar, int sizeAr, int el)
+{
+    return binSearchRecurs(ar, 0, sizeAr-1, el, 1);
+}
